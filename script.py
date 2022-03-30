@@ -16,11 +16,6 @@ logging.basicConfig(level="INFO")
 logger = logging.getLogger(__name__) # __name__=docai
 logger.info("This is an INFO message on the root logger.")
 
-
-container_name       =  "gen2con"
-storage_account_name =  "teststore70"
-account_access_key  =   "0IN8WZ/gmtdx7odCrURx+zFecEOUjhy4alMwOVi6hbh7C+nDVLHHbzkl0Rv3jSZ3KyN/5/vpKio5Yps8RC46Kw=="
-
 # spark = SparkSession.builder.getOrCreate()
 
 # from datetime import datetime, date

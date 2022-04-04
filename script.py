@@ -17,9 +17,9 @@ import click
 # logger.info("This is an INFO message on the root logger.")
 
 
-container_name       =  "gen2con"
-storage_account_name =  "teststore70"
-account_access_key  =   "0IN8WZ/gmtdx7odCrURx+zFecEOUjhy4alMwOVi6hbh7C+nDVLHHbzkl0Rv3jSZ3KyN/5/vpKio5Yps8RC46Kw=="
+container_name       =  <container_name>
+storage_account_name =  <storage_account_name>
+account_access_key  =   <account_access_key>
 
 
 # from datetime import datetime, date

@@ -17,10 +17,6 @@ import click
 # logger.info("This is an INFO message on the root logger.")
 
 
-container_name       =  "spark-job-dev"
-storage_account_name =  "nlpsparkdev"
-account_access_key  =   "1A0GxnV86EJFd5YB4B1oXww3Fg+pTp34TOl0Z9q40qWzWNNS25xQjn4L5uwSvyTlYHWf2DtVdQFyDWUxIf4AVw=="
-
 
 # from datetime import datetime, date
 # # import pandas as pd

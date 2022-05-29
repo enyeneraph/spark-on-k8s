@@ -17,9 +17,9 @@ import click
 # logger.info("This is an INFO message on the root logger.")
 
 
-container_name       =  <container_name>
-storage_account_name =  <storage_account_name>
-account_access_key  =   <account_access_key>
+container_name       =  "spark-job-dev"
+storage_account_name =  "nlpsparkdev"
+account_access_key  =   "1A0GxnV86EJFd5YB4B1oXww3Fg+pTp34TOl0Z9q40qWzWNNS25xQjn4L5uwSvyTlYHWf2DtVdQFyDWUxIf4AVw=="
 
 
 # from datetime import datetime, date
@@ -32,24 +32,32 @@ account_access_key  =   <account_access_key>
 #     Row(a=4, b=5., c='string3', d=date(2000, 3, 1), e=datetime(2000, 1, 3, 12, 0))
 # ])
 # df.show()
+
+# .config("spark.jars.packages", "io.delta:delta-core_2.12:1.2.1,org.apache.hadoop:hadoop-azure-datalake:3.2.1,org.apache.hadoop:hadoop-azure:3.2.1") \
+  # .config("spark.jars.packages", "io.delta:delta-core_2.12:1.2.1,org.apache.hadoop:hadoop-azure-datalake:3.2.1,org.apache.hadoop:hadoop-azure:3.2.1") \
 spark = SparkSession \
   .builder \
   .appName("documentai") \
   .master("local") \
-  .config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0,org.apache.hadoop:hadoop-azure-datalake:3.2.1,org.apache.hadoop:hadoop-azure:3.2.1") \
+  .config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0,org.apache.hadoop:hadoop-azure:3.2.1") \
   .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
   .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
   .config(f"spark.hadoop.fs.azure.account.auth.type.{storage_account_name}.dfs.core.windows.net", "SharedKey")\
   .config(f"spark.hadoop.fs.azure.account.key.{storage_account_name}.dfs.core.windows.net", f"{account_access_key}") \
  .getOrCreate()
 
-spark.range(5).write.format("delta").save("tmp/deltab")
-print("Successfully written")
-df = spark.read.format("delta").load("tmp/deltab")
-df.show()
+# spark.sparkContext._jsc.hadoopConfiguration().set("spark.hadoop.fs.abfss.impl","org.apache.hadoop.fs.azurebfs.AzureBlobFileSystem")
 
+# spark.range(5).write.format("delta").save("tmp/deltab")
+print("Successfully written")
+# df = spark.read.format("delta").load("tmp/deltab")
+# df.show()
+
+#writing to adls gen 2
+spark.range(10).write.format("delta").save(f"abfss://{container_name}@{storage_account_name}.dfs.core.windows.net/test9")
+print('Done writing to azure')
 #reading from azdls gen 2
-df = spark.read.format("delta").load(f"abfss://{container_name}@{storage_account_name}.dfs.core.windows.net/test6")
+df = spark.read.format("delta").load(f"abfss://{container_name}@{storage_account_name}.dfs.core.windows.net/test9")
 
 df.show()
 

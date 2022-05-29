@@ -15,8 +15,9 @@ import click
 # logging.basicConfig(level="INFO")
 # logger = logging.getLogger(__name__) # __name__=docai
 # logger.info("This is an INFO message on the root logger.")
-
-
+container_name       =  <container_name>
+storage_account_name = <storage_account_name>
+account_access_key  =   <account_access_key>
 
 # from datetime import datetime, date
 # # import pandas as pd
@@ -35,7 +36,7 @@ spark = SparkSession \
   .builder \
   .appName("documentai") \
   .master("local") \
-  .config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0,org.apache.hadoop:hadoop-azure:3.2.1") \
+  .config("spark.jars.packages", "io.delta:delta-core_2.12:1.2.1,org.apache.hadoop:hadoop-azure:3.2.1") \
   .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
   .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
   .config(f"spark.hadoop.fs.azure.account.auth.type.{storage_account_name}.dfs.core.windows.net", "SharedKey")\

@@ -1,7 +1,6 @@
 # FROM gcr.io/spark-operator/spark-py:v3.1.1-hadoop3
-FROM apache/spark-py:v3.2.1
-# FROM apache/spark-py:v3.1.3
-# .config("spark.hadoop.fs.abfs.impl", "org.apache.hadoop.fs.azurebfs.AzureBlobFileSystem") \
+# FROM apache/spark-py:v3.2.1
+FROM apache/spark-py:v3.1.3
 # FROM gcr.io/spark-operator/spark-py:v3.1.1
 
 USER root
